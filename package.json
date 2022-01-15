@@ -1,5 +1,10 @@
 {
-  "name": "motoko-import-sort",
+	"name": "motoko-import-sort",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jorgenbuilder/vscode-motoko-import-sort"
+	},
+	"publisher": "JorgenBuilder",
 	"displayName": "motoko-import-sort",
 	"description": "Groups Motoko imports into base, 3rd party, project, module and sorts them alphabetically",
 	"version": "0.0.1",

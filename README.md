@@ -1,4 +1,4 @@
-Groups motoko imports grouped hierarchically, then sorts them alphabetically.
+Groups motoko imports hierarchically, then sorts them alphabetically.
 
 ```motoko
 // Before
