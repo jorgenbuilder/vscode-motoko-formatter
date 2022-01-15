@@ -39,7 +39,7 @@ export function activate(context: vscode.ExtensionContext) {
 			});
 			while (imports.unsorted.length) {
 				const match = imports.unsorted.shift() as string;
-				if (match.includes('mo:base')) {
+				if (match.includes('mo:base') || match.includes('mo:⛔') || match.includes('mo:prim')) {
 					imports.base.push(match);
 				} else if (match.includes('mo:')) {
 					imports.thirdParty.push(match);
