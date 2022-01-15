@@ -1,30 +1,45 @@
 {
-	"name": "motoko-import-sort",
+	"name": "motoko-formatter",
+	"version": "0.0.6",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/jorgenbuilder/vscode-motoko-import-sort"
+		"url": "https://github.com/jorgenbuilder/vscode-motoko-formatter"
 	},
 	"publisher": "JorgenBuilder",
-	"displayName": "motoko-import-sort",
-	"description": "Groups Motoko imports into base, 3rd party, project, module and sorts them alphabetically",
-	"version": "0.0.2",
+	"displayName": "Motoko Formatter",
+	"description": "For handsome, consistent Motoko",
+	"icon": "icon.png",
 	"engines": {
 		"vscode": "^1.63.0"
 	},
 	"categories": [
-		"Other"
+		"Formatters"
 	],
 	"activationEvents": [
-        "onCommand:motoko-import-sort.sort"
-	],
+        "onLanguage:motoko"
+    ],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [
-			{
-				"command": "motoko-import-sort.sort",
-				"title": "Sort Motoko"
+		"languages": [
+            {
+                "id": "motoko",
+                "aliases": [
+                    "Motoko"
+                ],
+                "extensions": [
+                    "mo"
+                ]
+            }
+        ],
+		"configuration": {
+			"title": "Motoko Formatter",
+			"properties": {
+				"motokoFormatter.groupImports": {
+					"type": "boolean",
+					"default": true
+				}
 			}
-		]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

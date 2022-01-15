@@ -1,19 +1,27 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+
 export function activate(context: vscode.ExtensionContext) {
 
-	function sort(document?: vscode.TextDocument) {
+	vscode.languages.registerDocumentFormattingEditProvider('motoko', {
+		provideDocumentFormattingEdits(document: vscode.TextDocument): vscode.TextEdit[] {
+			const edits : vscode.TextEdit[] = [];
+			if (vscode.workspace.getConfiguration('motokoFormatter').get('groupImports')) {
+				const groupImports = sort(document);
+				groupImports && edits.push(groupImports);
+			}
+			return edits;
+		}
+	});
+
+	function sort(document?: vscode.TextDocument) : vscode.TextEdit | undefined {
 		{
 			const language = document?.languageId;
 			if (language !== 'motoko') {
 				return;
 			}
 			const body = document?.getText();
-			if (!body) { return; };
+			if (!document || !body) { return; };
 			// Get import lines (top of file, has "Import", delete blank lines and comments)
 			const reg = /import.+/g;
 			const imports : { [key : string] : string[]} = {
@@ -63,12 +71,10 @@ export function activate(context: vscode.ExtensionContext) {
 				importString += (importString.length ? '\n\n' : '') + imports.module.join('\n');
 			}
 			let result = `${before}${importString}${after}`;
-			return vscode.window.activeTextEditor?.edit((edit) => {
-				edit.replace(
-					new vscode.Range(0, 0, Number.MAX_VALUE, Number.MAX_VALUE),
-					result
-				);
-			});
+			return new vscode.TextEdit(
+				new vscode.Range(0, 0, Number.MAX_VALUE, Number.MAX_VALUE),
+				result,
+			);
 		}
 	};
 
