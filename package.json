@@ -7,7 +7,7 @@
 	"publisher": "JorgenBuilder",
 	"displayName": "motoko-import-sort",
 	"description": "Groups Motoko imports into base, 3rd party, project, module and sorts them alphabetically",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"engines": {
 		"vscode": "^1.63.0"
 	},
